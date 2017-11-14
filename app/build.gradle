@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 22
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:22.2.1'
+    implementation 'com.dropbox.core:dropbox-core-sdk:2.0.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+ext {
+    // Where you will see your artifact in Bintray's web interface
+    // The "bintrayName" should match the name of the Bintray repro.
+    bintrayRepo = 'maven'
+    bintrayName = 'romanpulov-library-dropbox'
+
+    // Maven metadata
+    publishedGroupId = 'com.romanpulov.library.dropbox'
+    libraryName = 'library'
+    // Save yourself a head ache, and set this equal to the name of the Android Studio library
+    // module. The artifact name needs to match the name of the library.
+    artifact = 'library'
+
+    libraryDescription = 'Roman Pulov Dropbox library for Android'
+    libraryVersion = '1.0.1'
+
+    developerId = 'romanpulov'
+    developerName = 'Roman Pulov'
+    developerEmail = 'roman.pulov@at.com'
+
+    siteUrl = 'https://github.com/MrZeRo2000/library-dropbox-android'
+    gitUrl = 'https://github.com/MrZeRo2000/library-dropbox-android.git'
+
+    licenseName = 'Apache License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: 'https://raw.githubusercontent.com/MrZeRo2000/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/MrZeRo2000/JCenter/master/bintrayv1.gradle'
