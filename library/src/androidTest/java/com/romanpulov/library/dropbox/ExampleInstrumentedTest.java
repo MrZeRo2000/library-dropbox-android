@@ -5,6 +5,8 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.dropbox.core.v2.DbxClientV2;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -31,5 +33,12 @@ public class ExampleInstrumentedTest {
         DropboxHelper dropboxHelper = DropboxHelper.getInstance(context);
         assertNotNull(dropboxHelper);
         Log.d("accessToken", "AccessToken = " + dropboxHelper.getAccessToken());
+
+        try {
+            DbxClientV2 client = dropboxHelper.getClient();
+        } catch (NullPointerException e) {
+            assertEquals("accessToken", e.getMessage());
+        }
+
     }
 }
