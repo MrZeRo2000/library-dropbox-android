@@ -1,7 +1,7 @@
 package com.romanpulov.library.dropbox;
 
 import com.dropbox.core.DbxRequestConfig;
-import com.dropbox.core.http.OkHttpRequestor;
+import com.dropbox.core.http.OkHttp3Requestor;
 import com.dropbox.core.v2.DbxClientV2;
 
 import java.util.Locale;
@@ -17,10 +17,9 @@ public class DropboxClientFactory {
     public static void init(String clientIdentifier, String accessToken) {
         if (sDbxClient == null) {
             String userLocale = Locale.getDefault().toString();
-            DbxRequestConfig requestConfig = new DbxRequestConfig(
-                    clientIdentifier,
-                    userLocale,
-                    OkHttpRequestor.INSTANCE);
+            DbxRequestConfig requestConfig = DbxRequestConfig.newBuilder(clientIdentifier)
+                    .withHttpRequestor(new OkHttp3Requestor(OkHttp3Requestor.defaultOkHttpClient()))
+                    .build();
 
             sDbxClient = new DbxClientV2(requestConfig, accessToken);
         }
