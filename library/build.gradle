@@ -8,7 +8,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0.7"
+        versionName "1.0.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -54,7 +54,7 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'Roman Pulov Dropbox library for Android'
-    libraryVersion = '1.0.7'
+    libraryVersion = '1.0.9'
 
     developerId = 'romanpulov'
     developerName = 'Roman Pulov'
