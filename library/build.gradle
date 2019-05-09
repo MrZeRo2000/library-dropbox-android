@@ -27,7 +27,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.dropbox.core:dropbox-core-sdk:3.0.9'
+    api 'com.dropbox.core:dropbox-core-sdk:3.0.9'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -54,7 +54,7 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'Roman Pulov Dropbox library for Android'
-    libraryVersion = '1.0.9'
+    libraryVersion = '1.0.10'
 
     developerId = 'romanpulov'
     developerName = 'Roman Pulov'
