@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
-        versionName "1.0.9"
+        versionName "1.0.11"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -26,7 +26,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
     api 'com.dropbox.core:dropbox-core-sdk:3.0.9'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     testImplementation 'junit:junit:4.12'
@@ -36,7 +35,7 @@ dependencies {
 
 afterEvaluate {
     javadoc.classpath += files(android.libraryVariants.collect { variant ->
-        variant.javaCompiler.classpath.files
+        variant.javaCompileProvider.get().classpath.files
     })
 }
 
@@ -54,7 +53,7 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'Roman Pulov Dropbox library for Android'
-    libraryVersion = '1.0.10'
+    libraryVersion = '1.0.11'
 
     developerId = 'romanpulov'
     developerName = 'Roman Pulov'
