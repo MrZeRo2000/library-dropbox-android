@@ -5,17 +5,26 @@ import android.content.SharedPreferences;
 
 import com.dropbox.core.android.Auth;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.FileMetadata;
+import com.dropbox.core.v2.files.Metadata;
+import com.dropbox.core.v2.files.WriteMode;
+
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Helper class for Dropbox operation
  * Created by romanpulov on 14.11.2017.
  */
 public class DropboxHelper {
-    public class DBHException extends Exception {
-        public DBHException() {}
+    public static class DBHException extends Exception {
     }
 
-    public class DBHNoAccessTokenException extends DBHException {
+    public static class DBHFileNotFoundException extends Exception {
+    }
+
+
+    public static class DBHNoAccessTokenException extends DBHException {
         public DBHNoAccessTokenException() {
             super();
         }
@@ -29,6 +38,7 @@ public class DropboxHelper {
     private final String mClientIdentifier;
     private final SharedPreferences mPrefs;
     private String mAccessToken;
+    private DbxClientV2 mClient;
 
     public static DropboxHelper getInstance(Context context) {
         return DropboxHelper.getInstance(context, context.getPackageName());
@@ -75,8 +85,35 @@ public class DropboxHelper {
         return DropboxClientFactory.getClient();
     }
 
+    public void initClient() {
+        mClient = getClient();
+    }
+
     public void validateDropBox() throws DBHException {
         if (getAccessToken() == null)
             throw new DBHNoAccessTokenException();
+    }
+
+    private void ensureClient() {
+        if (mClient == null) {
+            initClient();
+        }
+    }
+
+    public void putStream(InputStream inputStream, String path) throws Exception {
+        ensureClient();
+        mClient.files().uploadBuilder(path).withMode(WriteMode.OVERWRITE).uploadAndFinish(inputStream);
+    }
+
+    public void getStream(OutputStream outputStream, String path) throws Exception {
+        ensureClient();
+
+        Metadata m = mClient.files().getMetadata(path);
+        if (!(m instanceof FileMetadata))
+            throw new DBHFileNotFoundException();
+
+        FileMetadata fm = (FileMetadata) m;
+
+        mClient.files().download(fm.getPathLower(), fm.getRev()).download(outputStream);
     }
 }

@@ -1,14 +1,43 @@
 apply plugin: 'com.android.library'
 
+ext {
+    // Where you will see your artifact in Bintray's web interface
+    // The "bintrayName" should match the name of the Bintray repro.
+    bintrayRepo = 'maven'
+    bintrayName = 'romanpulov-library-dropbox'
+
+    // Maven metadata
+    publishedGroupId = 'com.romanpulov.library.dropbox'
+    libraryName = 'library'
+    // Save yourself a head ache, and set this equal to the name of the Android Studio library
+    // module. The artifact name needs to match the name of the library.
+    artifact = 'library'
+
+    libraryDescription = 'Roman Pulov Dropbox library for Android'
+    libraryVersion = '1.1.0'
+
+    developerId = 'romanpulov'
+    developerName = 'Roman Pulov'
+    developerEmail = 'roman.pulov@at.com'
+
+    siteUrl = 'https://github.com/MrZeRo2000/library-dropbox-android'
+    gitUrl = 'https://github.com/MrZeRo2000/library-dropbox-android.git'
+
+    licenseName = 'Apache License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
-        versionName "1.0.11"
+        versionName libraryVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -28,7 +57,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api 'com.dropbox.core:dropbox-core-sdk:3.0.9'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
@@ -37,35 +66,6 @@ afterEvaluate {
     javadoc.classpath += files(android.libraryVariants.collect { variant ->
         variant.javaCompileProvider.get().classpath.files
     })
-}
-
-ext {
-    // Where you will see your artifact in Bintray's web interface
-    // The "bintrayName" should match the name of the Bintray repro.
-    bintrayRepo = 'maven'
-    bintrayName = 'romanpulov-library-dropbox'
-
-    // Maven metadata
-    publishedGroupId = 'com.romanpulov.library.dropbox'
-    libraryName = 'library'
-    // Save yourself a head ache, and set this equal to the name of the Android Studio library
-    // module. The artifact name needs to match the name of the library.
-    artifact = 'library'
-
-    libraryDescription = 'Roman Pulov Dropbox library for Android'
-    libraryVersion = '1.0.11'
-
-    developerId = 'romanpulov'
-    developerName = 'Roman Pulov'
-    developerEmail = 'roman.pulov@at.com'
-
-    siteUrl = 'https://github.com/MrZeRo2000/library-dropbox-android'
-    gitUrl = 'https://github.com/MrZeRo2000/library-dropbox-android.git'
-
-    licenseName = 'Apache License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-
-    allLicenses = ["Apache-2.0"]
 }
 
 apply from: 'https://raw.githubusercontent.com/MrZeRo2000/JCenter/master/installv1.gradle'
