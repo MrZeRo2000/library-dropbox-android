@@ -10,16 +10,16 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'Roman Pulov Dropbox library for Android'
-    libraryVersion = '1.1.4'
+    libraryVersion = '1.1.6'
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName libraryVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -44,6 +44,16 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+android {
+    publishing {
+        singleVariant('release') {
+        }
+        singleVariant('debug') {
+            withSourcesJar()
+        }
+    }
 }
 
 // Because the components are created only during the afterEvaluate phase, you must
