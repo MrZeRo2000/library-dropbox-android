@@ -10,7 +10,7 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'Roman Pulov Dropbox library for Android'
-    libraryVersion = '1.1.7'
+    libraryVersion = '1.1.8'
 }
 
 android {
